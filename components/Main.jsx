@@ -7,16 +7,16 @@ const Main = () => {
   const router = useRouter();
 
   const redirectToLinkedIn = () => {
-    router.push('https://www.linkedin.com')
+    router.push("https://www.linkedin.com")
   };
   const redirectToInstagram = () => {
-    router.push('https://www.instagram.com/agsslmmm_/')
+    router.push("https://www.instagram.com/agsslmmm_/")
   };
   const redirectToFacebook = () => {
-    router.push('https://www.facebook.com/melOodrasagus/')
+    router.push("https://www.facebook.com/melOodrasagus/")
   };
   const redirectToGithub = () => {
-    router.push('https://github.com/Agsslmmmmm')
+    router.push("https://github.com/Agsslmmmmm")
   }
   return (
    <div className='w-full h-screen text-center' id='header'>
