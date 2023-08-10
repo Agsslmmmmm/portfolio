@@ -91,7 +91,7 @@ export const Navbar = () => {
                     <li className='py-4 text-sm'>Projects</li>
                 </Link>
             </ul>
-            <div className='pt-40'>
+            <div className='pt-10'>
             <p className='uppercase tracking-widest text-[#5651e5]'>Let's connect</p>
             <div className='flex items-center justify-between my-4 w-full sm:w-[80%]'>
             <div className='rounded-full shadow-lg shadow-gray-400 p-3 cursor-pointer hover:scale-105 ease-in duration-300' onClick={redirectToLinkedIn}>
