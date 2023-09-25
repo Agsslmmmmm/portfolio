@@ -1,52 +1,44 @@
-import React, { useState, useEffect } from 'react';
+import Image from 'next/image'
+import Head from 'next/head'
+import { Navbar } from '@/components/Navbar'
+import Main from '../components/Main'
+import About from '@/components/About'
+import Projects from '@/components/Projects'
+import Skills from '@/components/Skills'
+import {useRef} from 'react'
 
-const Navbar = () => {
-    const [isActive, setIsActive] = useState(false);
 
-    const toggleMenu = () => {
-        setIsActive(!isActive);
-    };
 
-    useEffect(() => {
-        // Fungsi untuk mendeteksi bagian yang sedang aktif
-        const handleScroll = () => {
-            const sections = document.querySelectorAll("section");
-            sections.forEach((section) => {
-                const rect = section.getBoundingClientRect();
-                if (rect.top >= 0 && rect.bottom <= window.innerHeight) {
-                    // Bagian ini sedang aktif, Anda dapat mengganti warna latar belakang Navbar sesuai kebutuhan
-                    setIsActive(true);
-                } else {
-                    // Bagian ini tidak aktif
-                    setIsActive(false);
-                }
-            });
-        };
+export default function Home() {
+  return (
+   <div>
+    <Head>
+      <title>Agus | Front-End Developer</title>
+      <meta name="description" content='Generate by create next app' />
+      <link rel="icon" href="/public/assets/pr.jpg" />
+    </Head>
 
-        // Menambahkan event listener untuk mendeteksi perubahan posisi scroll
-        window.addEventListener("scroll", handleScroll);
 
-        // Membersihkan event listener saat komponen Navbar tidak lagi digunakan
-        return () => {
-            window.removeEventListener("scroll", handleScroll);
-        };
-    }, []);
+    <Navbar />
 
-    return (
-        <div className='fixed top-5 left-0 right-0'>
+    <div className="header">
 
-            <nav
-                class="border border-b rounded-full p-4 shadow-lg hover:scale-110 transition-transform duration-500 w-[90%] mx-auto scrolling-navbar bg-white">
-                <ul class="flex space-x-4 items-center justify-center">
-                    <li className='hover:scale-110 transition-transform duration-500'><a href="#home" class="nav-link uppercase text-gray-400">Home</a></li>
-                    <li className='hover:scale-110 transition-transform duration-500'><a href="#about" class="nav-link uppercase text-gray-400">About</a></li>
-                    <li className='hover:scale-110 transition-transform duration-500'><a href="#team" class="nav-link uppercase text-gray-400">Skills</a></li>
-                    <li className='hover:scale-110 transition-transform duration-500'><a href="#contact" class="nav-link uppercase text-gray-400">Projects</a></li>
-                </ul>
-            </nav>
-        </div>
+    <Main />
+    </div>
+    <div className="about">
 
-    );
-};
+    <About />
+    </div>
+    <div className="skills">
 
-export default Navbar;
+    <Skills />
+    </div>
+    <div className="projects">
+
+    <Projects />
+    </div>
+
+
+   </div>
+  )
+}
