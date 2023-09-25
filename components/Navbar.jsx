@@ -1,117 +1,52 @@
-import React, { useState } from 'react'
-import Image from 'next/image'
-import Link from 'next/link'
-import { AiOutlineMenu, AiOutlineCloseCircle, AiFillGithub, AiFillMail, AiFillInstagram, AiFillFacebook } from 'react-icons/ai';
-import {AiFillLinkedin} from 'react-icons/ai'
-import {useEffect} from 'react'
+import React, { useState, useEffect } from 'react';
 
-import {useRouter} from 'next/router'
+const Navbar = () => {
+    const [isActive, setIsActive] = useState(false);
 
-
-
-export const Navbar = () => {
-    const [nav, setNav] = useState(false);
-
-    const handleNav = () => {
-        setNav(!nav)
+    const toggleMenu = () => {
+        setIsActive(!isActive);
     };
 
+    useEffect(() => {
+        // Fungsi untuk mendeteksi bagian yang sedang aktif
+        const handleScroll = () => {
+            const sections = document.querySelectorAll("section");
+            sections.forEach((section) => {
+                const rect = section.getBoundingClientRect();
+                if (rect.top >= 0 && rect.bottom <= window.innerHeight) {
+                    // Bagian ini sedang aktif, Anda dapat mengganti warna latar belakang Navbar sesuai kebutuhan
+                    setIsActive(true);
+                } else {
+                    // Bagian ini tidak aktif
+                    setIsActive(false);
+                }
+            });
+        };
 
-    const router = useRouter();
+        // Menambahkan event listener untuk mendeteksi perubahan posisi scroll
+        window.addEventListener("scroll", handleScroll);
 
-  const redirectToLinkedIn = () => {
-    router.push('https://www.linkedin.com')
-  };
-  const redirectToInstagram = () => {
-    router.push('https://www.instagram.com/agsslmmm_/')
-  };
-  const redirectToFacebook = () => {
-    router.push('https://www.facebook.com/melOodrasagus/')
-  };
-  const redirectToGithub = () => {
-    router.push('https://github.com/Agsslmmmmm')
-  }
+        // Membersihkan event listener saat komponen Navbar tidak lagi digunakan
+        return () => {
+            window.removeEventListener("scroll", handleScroll);
+        };
+    }, []);
 
+    return (
+        <div className='fixed top-5 left-0 right-0'>
 
-  return (
-    <div className='fixed w-full h-20 shadow-xl z-[100] bg-white'>
-        <div className='flex justify-between items-center w-full h-full px-2 2xl:px-16'>
-        <h1 className="font-bold text-xl cursor-pointer hover:scale-110 transition-transform duration-500">
-                                    Agus<span className='text-blue-500'>Salim</span>
-                                </h1>
-        <div>
-            <ul className='hidden md:flex'>
-                <Link href='/'>
-                    <li className='ml-10 text-sm uppercase hover:border-b'>Home</li>
-                </Link>
-                <Link href='#about'>
-                    <li className='ml-10 text-sm uppercase hover:border-b'>About</li>
-                </Link>
-                <Link href='#skills'>
-                    <li className='ml-10 text-sm uppercase hover:border-b'>Skills</li>
-                </Link>
-                <Link href='#projects'>
-                    <li className='ml-10 text-sm uppercase hover:border-b'>Projects</li>
-                </Link>
-            </ul>
-            <div onClick={handleNav} className='md:hidden cursor-pointer'>
-                <AiOutlineMenu size={25}/>
-            </div>
-        </div>
+            <nav
+                class="border border-b rounded-full p-4 shadow-lg hover:scale-110 transition-transform duration-500 w-[90%] mx-auto scrolling-navbar bg-white">
+                <ul class="flex space-x-4 items-center justify-center">
+                    <li className='hover:scale-110 transition-transform duration-500'><a href="#home" class="nav-link uppercase text-gray-400">Home</a></li>
+                    <li className='hover:scale-110 transition-transform duration-500'><a href="#about" class="nav-link uppercase text-gray-400">About</a></li>
+                    <li className='hover:scale-110 transition-transform duration-500'><a href="#team" class="nav-link uppercase text-gray-400">Skills</a></li>
+                    <li className='hover:scale-110 transition-transform duration-500'><a href="#contact" class="nav-link uppercase text-gray-400">Projects</a></li>
+                </ul>
+            </nav>
         </div>
 
+    );
+};
 
-        <div className={nav ? 'md:hidden fixed left-0 top-0 w-full h-screen bg-black/70': ''}>
-        <div className={nav ? 'fixed left-0 top-0 w-[75%] sm:w-[60%] h-screen bg-[#ecf0f3] p-10 ease-in duration-500': 'fixed left-[-100%] top-0 p-10 ease-in duration-500'}>
-        <div>
-            <div className='flex items-center justify-between'>
-                <h1 className="font-bold text-xl cursor-pointer hover:scale-110 transition-transform duration-500">
-                                    Agus<span className='text-blue-500'>Salim</span>
-                                </h1>
-                <div onClick={handleNav} className='rounded-full shadow-lg shadow-gray-400 p-3 cursor-pointer'>
-                    <AiOutlineCloseCircle />
-                </div>
-            </div>
-            <div className='border-b border-gray-300 my-4'>
-                <p className='w-[85%] md:w-[90%] py-4'>Let's build something legendary together</p>
-            </div>
-        </div>
-        <div className='py-4 flex-col'>
-            <ul className='uppercase'>
-                <Link href='/'>
-                    <li className='py-4 text-sm'>Home</li>
-                </Link>
-                <Link href='#about'>
-                    <li className='py-4 text-sm'>About</li>
-                </Link>
-                <Link href='#skills'>
-                    <li className='py-4 text-sm'>Skills</li>
-                </Link>
-                <Link href='#projects'>
-                    <li className='py-4 text-sm'>Projects</li>
-                </Link>
-            </ul>
-            <div className='pt-10'>
-            <p className='uppercase tracking-widest text-[#5651e5]'>Let's connect</p>
-            <div className='flex items-center justify-between my-4 w-full sm:w-[80%]'>
-            <div className='rounded-full shadow-lg shadow-gray-400 p-3 cursor-pointer hover:scale-105 ease-in duration-300' onClick={redirectToLinkedIn}>
-                <AiFillLinkedin />
-            </div>
-            <div className='rounded-full shadow-lg shadow-gray-400 p-3 cursor-pointer hover:scale-105 ease-in duration-300' onClick={redirectToGithub}>
-                <AiFillGithub />
-            </div>
-            <div className='rounded-full shadow-lg shadow-gray-400 p-3 cursor-pointer hover:scale-105 ease-in duration-300' onClick={redirectToFacebook}>
-                <AiFillFacebook />
-            </div>
-            <div className='rounded-full shadow-lg shadow-gray-400 p-3 cursor-pointer hover:scale-105 ease-in duration-300' onClick={redirectToInstagram}>
-                <AiFillInstagram />
-            </div>
-            </div>
-            </div>
-        </div>
-        </div>
-        </div>
-        </div>
-  )
-}
 export default Navbar;
