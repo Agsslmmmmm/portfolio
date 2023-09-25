@@ -8,25 +8,25 @@ const Navbar = () => {
     };
 
     useEffect(() => {
-        // Fungsi untuk mendeteksi bagian yang sedang aktif
+
         const handleScroll = () => {
             const sections = document.querySelectorAll("section");
             sections.forEach((section) => {
                 const rect = section.getBoundingClientRect();
                 if (rect.top >= 0 && rect.bottom <= window.innerHeight) {
-                    // Bagian ini sedang aktif, Anda dapat mengganti warna latar belakang Navbar sesuai kebutuhan
+
                     setIsActive(true);
                 } else {
-                    // Bagian ini tidak aktif
+
                     setIsActive(false);
                 }
             });
         };
 
-        // Menambahkan event listener untuk mendeteksi perubahan posisi scroll
+
         window.addEventListener("scroll", handleScroll);
 
-        // Membersihkan event listener saat komponen Navbar tidak lagi digunakan
+
         return () => {
             window.removeEventListener("scroll", handleScroll);
         };
