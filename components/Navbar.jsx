@@ -1,37 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
 const Navbar = () => {
-    const [isActive, setIsActive] = useState(false);
-
-    const toggleMenu = () => {
-        setIsActive(!isActive);
-    };
-
-    useEffect(() => {
-
-        const handleScroll = () => {
-            const sections = document.querySelectorAll("section");
-            sections.forEach((section) => {
-                const rect = section.getBoundingClientRect();
-                if (rect.top >= 0 && rect.bottom <= window.innerHeight) {
-
-                    setIsActive(true);
-                } else {
-
-                    setIsActive(false);
-                }
-            });
-        };
-
-
-        window.addEventListener("scroll", handleScroll);
-
-
-        return () => {
-            window.removeEventListener("scroll", handleScroll);
-        };
-    }, []);
-
     return (
         <div className='fixed top-5 left-0 right-0'>
 
